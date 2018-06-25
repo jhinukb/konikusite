@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% comment %}
+
+This is the display for the 'Post Ad' form.
+
+URL: cell_form/
+Model: Cell
+ModelForm: CellForm
+View: CellFormPage [FormView]
+View Return: HttpResponse : message - "Sweeeeeeeet."
+
+* = preset when user is logged in.
+
+{% endcomment %}
+
+{% block content %}
+<form action="/cell_form/" method="post">{% csrf_token %}
+    <!-- *name -->
+    {{  form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.name.errors }}
+        <label for="id_name">Name</label>
+        {{ form.name }}
+    </div>
+    <!-- *email -->
+    <div class="fieldWrapper">
+        {{ form.email.errors }}
+        <label for="id_email">Email</label>
+        {{ form.email }}
+    </div>
+    <button type="submit">
+        <i class="fa fa-thumb-tack"></i> Post
+    </button>
+</form>
+{% endblock %}
