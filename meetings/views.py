@@ -8,6 +8,7 @@ from .models import Cell
 from .forms import CellForm
 from django import forms
 # Create your views here.
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 def index(request):
@@ -17,7 +18,8 @@ def index(request):
 class CellFormPage(FormView):
     Model = Cell
     template_name = 'meetings/cell_form.html'
-    success_url = '/awesome/'
+    fields = ('cell_name',)
+    success_url = reverse_lazy('cell_form')
     form_class = CellForm
 
     def form_valid(self, form):

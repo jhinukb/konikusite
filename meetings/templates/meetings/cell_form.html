@@ -14,22 +14,46 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
 {% endcomment %}
 
 {% block content %}
+
+<style>
+  #next {
+    background-color: indigo; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  #t {
+    font-size: 20px;
+  }
+</style>
+<a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 <form action="/cell_form/" method="post">{% csrf_token %}
     <!-- *name -->
     {{  form.non_field_errors }}
     <div class="fieldWrapper">
-        {{ form.name.errors }}
-        <label for="id_name">Name</label>
-        {{ form.name }}
+        {{ form.cell.errors }}
+        <!-- <select name="cell_name">
+            <option value={{ form.as_table }}</option>
+        </select> -->
+        <label for="id_name" id='cell_name'>Cell Name:</label>
+          <table id='t'>
+            {{ form.cell }}
+          </table>
     </div>
     <!-- *email -->
     <div class="fieldWrapper">
-        {{ form.email.errors }}
-        <label for="id_email">Email</label>
-        {{ form.email }}
+        {{ form.member_name.errors }}
+        <label for="id_name" id='cell_name'>Cell Name:</label>
+          <table id='t'>
+            {{ form.cell }}
+          </table>
     </div>
-    <button type="submit">
-        <i class="fa fa-thumb-tack"></i> Post
+    <button type="submit" id='next'>
+        <i class="fa fa-thumb-tack"></i> Next
     </button>
 </form>
 {% endblock %}

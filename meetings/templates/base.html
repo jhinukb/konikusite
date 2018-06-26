@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}Simple ERP{% endblock %}</title>
+    <title>{% block title %}Koniku Meeting Tracker{% endblock %}</title>
     <style type="text/css">
       .errorlist {
         margin: 0;
@@ -17,9 +17,15 @@
       .errorlist ~ select {
         border-color: red;
       }
+      h1 {
+        color:indigo;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 40px;
+      }
     </style>
   </head>
   <body>
+    <a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
     <h1>Koniku Meeting Tracker</h1>
     <hr>
     {% block content %}
