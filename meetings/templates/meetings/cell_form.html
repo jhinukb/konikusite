@@ -31,14 +31,12 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
   }
 </style>
 <a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-<form action="/cell_form/" method="post">{% csrf_token %}
+<form method="post" id="cellForm" data-members-url="{% url 'ajax_load_members' %}" novalidate>
+{% csrf_token %}
     <!-- *name -->
     {{  form.non_field_errors }}
     <div class="fieldWrapper">
         {{ form.cell.errors }}
-        <!-- <select name="cell_name">
-            <option value={{ form.as_table }}</option>
-        </select> -->
         <label for="id_name" id='cell_name'></label>
           <table id='t'>
             {{ form.as_table }}
@@ -49,16 +47,16 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
     </button>
 </form>
 
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-  $("#id_member").change(function () {
-    var url = $("#CellFormPage").attr("data-members-url");  // get the url of the `load_cities` view
-    var memberID = $(this).val();  // get the selected country ID from the HTML input
+  $("#id_cell").change(function () {
+    var url = $("#cellForm").attr('data-members-url');  // get the url of the `load_cities` view
+    var cellID = $(this).val();  // get the selected country ID from the HTML input
 
     $.ajax({                       // initialize an AJAX request
       url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
       data: {
-        'member': memberID       // add the country id to the GET parameters
+        'cell': cellID       // add the country id to the GET parameters
       },
       success: function (data) {   // `data` is the return of the `load_cities` view function
         $("#id_member").html(data);  // replace the contents of the city input with the data that came from the server
@@ -66,5 +64,5 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
     });
 
   });
-</script> -->
+</script>
 {% endblock %}

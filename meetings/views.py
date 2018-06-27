@@ -12,9 +12,9 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 def load_members(request):
-    cell = request.GET.get('cell')
-    members = Member.objects.filter(cell=cell).order_by('member_name')
-    return render(request, 'meeting/cellName_dropdown_list_options.html', {'members': members})
+    cell_id = request.GET.get('cell')
+    members = Member.objects.filter(cell_id=cell_id).order_by('member_name')
+    return render(request, 'meetings/cellName_dropdown_list_options.html', {'members': members})
 
 def index(request):
     template_name = 'meetings/index.html'
