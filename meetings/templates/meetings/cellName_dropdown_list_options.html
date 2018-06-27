@@ -1,4 +1,4 @@
 <option value="">---------</option>
-{% for cell in cellNames %}
-<option value="{{ cell.pk }}">{{ cell.name }}</option>
+{% for member in members %}
+<option value="{{ member.pk }}">{{ member.member_name }}</option>
 {% endfor %}

@@ -39,21 +39,32 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
         <!-- <select name="cell_name">
             <option value={{ form.as_table }}</option>
         </select> -->
-        <label for="id_name" id='cell_name'>Cell Name:</label>
+        <label for="id_name" id='cell_name'></label>
           <table id='t'>
-            {{ form.cell }}
-          </table>
-    </div>
-    <!-- *email -->
-    <div class="fieldWrapper">
-        {{ form.member_name.errors }}
-        <label for="id_name" id='cell_name'>Cell Name:</label>
-          <table id='t'>
-            {{ form.cell }}
+            {{ form.as_table }}
           </table>
     </div>
     <button type="submit" id='next'>
         <i class="fa fa-thumb-tack"></i> Next
     </button>
 </form>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_member").change(function () {
+    var url = $("#CellFormPage").attr("data-members-url");  // get the url of the `load_cities` view
+    var memberID = $(this).val();  // get the selected country ID from the HTML input
+
+    $.ajax({                       // initialize an AJAX request
+      url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'member': memberID       // add the country id to the GET parameters
+      },
+      success: function (data) {   // `data` is the return of the `load_cities` view function
+        $("#id_member").html(data);  // replace the contents of the city input with the data that came from the server
+      }
+    });
+
+  });
+</script> -->
 {% endblock %}

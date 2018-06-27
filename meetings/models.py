@@ -19,8 +19,8 @@ class Member(models.Model):
 	def get_email(self):
 		return self.email
 
-class Objectives(models.Model):
-	objective_text = models.CharField(max_length=400)
+class Objective(models.Model):
+	text = models.CharField(max_length=400)
 	cell = models.ForeignKey(Cell, on_delete=models.CASCADE)
 	pub_date = models.DateTimeField(default=timezone.now)
 	def __str__(self):
@@ -28,3 +28,7 @@ class Objectives(models.Model):
 	def was_published_recently(self):
 		now = timezone.now()
 		return now - datetime.timedelta(days=14) <= self.pub_date <= now
+
+class CellForm(models.Model):
+	cell = models.ForeignKey(Cell, on_delete=models.CASCADE)
+	member = models.ForeignKey(Member, on_delete=models.CASCADE)

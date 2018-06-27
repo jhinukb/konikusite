@@ -1,5 +1,5 @@
 from django import forms
-from meetings.models import Cell, Objectives, Member
+from meetings.models import Cell, Objective, Member, CellForm
 
 CELL_CHOICES = [
     ('tim', 'TIM'),
@@ -9,13 +9,12 @@ CELL_CHOICES = [
 
 class CellForm(forms.ModelForm):
     class Meta:
-        model = Member
-        fields = ('cell', 'member_name')
+        model = CellForm
+        fields = ('cell', 'member')
         member_name= forms.CharField(label='What is your Cell?', widget=forms.Select(choices=CELL_CHOICES))
-    #forms.CharField(max_length=100)
         email= forms.EmailField()
         cell = forms.CharField(label='What is your Cell?', widget=forms.Select(choices=CELL_CHOICES))
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
-    #     self.fields['member_name'].queryset = City.objects.none()
+    #     self.fields['member'].queryset = Member.objects.none()
