@@ -1,0 +1,5 @@
+{% for member in members %}
+<label class="checkbox">
+    <input type="checkbox" name="tag[]" value="{{ member.pk }}" {{ member.member_name }}>
+</label>
+{% endfor %}

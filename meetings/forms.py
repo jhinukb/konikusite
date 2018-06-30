@@ -7,6 +7,7 @@ CELL_CHOICES = [
     ('lotus', 'Lotus'),
     ]
 
+#member = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=cell.members)
 class CellForm(forms.ModelForm):
     class Meta:
         model = CellForm

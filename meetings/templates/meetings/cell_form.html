@@ -24,7 +24,7 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
   }
   #t {
     font-size: 20px;
@@ -41,25 +41,43 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
           <table id='t'>
             {{ form.as_table }}
           </table>
+
+    </div>
+    <div>
+      <label for='checkbox'>Attendee List:</label>
+      <table id='checkbox'>
+        {{ form.member }}
+      </table>
     </div>
     <button type="submit" id='next'>
-        <i class="fa fa-thumb-tack"></i> Next
+      <label>Next</label>
+        <i class="fa fa-thumb-tack"></i>
     </button>
+
 </form>
+<!--
+<form method="post" id="cellCheckbox" data-members-url="{% url 'ajax_load_attendees' %}" novalidate>
+  <div>
+    <label for='checkbox'>Attendee List:</label>
+    <table id='checkbox'>
+      {{ form.member }}
+    </table>
+  </div>
+</form> -->
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   $("#id_cell").change(function () {
-    var url = $("#cellForm").attr('data-members-url');  // get the url of the `load_cities` view
-    var cellID = $(this).val();  // get the selected country ID from the HTML input
+    var url = $("#cellForm").attr('data-members-url');  // get the url of the `load_members` view
+    var cellID = $(this).val();  // get the selected cell ID from the HTML input
 
     $.ajax({                       // initialize an AJAX request
-      url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-members/)
       data: {
-        'cell': cellID       // add the country id to the GET parameters
+        'cell': cellID       // add the cell id to the GET parameters
       },
-      success: function (data) {   // `data` is the return of the `load_cities` view function
-        $("#id_member").html(data);  // replace the contents of the city input with the data that came from the server
+      success: function (data) {   // `data` is the return of the `load_members` view function
+        $("#id_member").html(data);  // replace the contents of the member input with the data that came from the server
       }
     });
 

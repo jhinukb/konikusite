@@ -16,6 +16,12 @@ def load_members(request):
     members = Member.objects.filter(cell_id=cell_id).order_by('member_name')
     return render(request, 'meetings/cellName_dropdown_list_options.html', {'members': members})
 
+#testing this out for checkboxes of attendee list
+def load_attendees(request):
+    cell_id = request.GET.get('cell')
+    members = Member.objects.filter(cell_id=cell_id).order_by('member_name')
+    return render(request, 'meetings/memberName_checkbox.html', {'members': members})
+
 def index(request):
     template_name = 'meetings/index.html'
     return HttpResponse("Hello, world. You're at the meetings index.")
