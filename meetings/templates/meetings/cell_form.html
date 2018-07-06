@@ -29,6 +29,7 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
   #t {
     font-size: 20px;
   }
+
 </style>
 <a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 <form method="post" id="cellForm" data-members-url="{% url 'ajax_load_members' %}" novalidate>
@@ -41,29 +42,20 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
           <table id='t'>
             {{ form.as_table }}
           </table>
-
     </div>
-    <div>
+    <!-- <div>
       <label for='checkbox'>Attendee List:</label>
       <table id='checkbox'>
         {{ form.member }}
       </table>
-    </div>
+    </div> -->
     <button type="submit" id='next'>
       <label>Next</label>
         <i class="fa fa-thumb-tack"></i>
     </button>
 
 </form>
-<!--
-<form method="post" id="cellCheckbox" data-members-url="{% url 'ajax_load_attendees' %}" novalidate>
-  <div>
-    <label for='checkbox'>Attendee List:</label>
-    <table id='checkbox'>
-      {{ form.member }}
-    </table>
-  </div>
-</form> -->
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
