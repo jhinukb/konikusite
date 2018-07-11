@@ -12,11 +12,10 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 def load_members(request):
-    return 'hi'
-    #cell_id = request.GET.get('cell')
-    # members = Member.objects.filter(cell_id=cell_id).order_by('member_name')
-    # #return cell
-    # return render(request, 'meetings/meeting_dropdown_list_options.html', {'members': members})
+    cell_id = request.GET.get('cell')
+    members = Member.objects.filter(cells=cell_id).order_by('member_name')
+    return render(request, 'meetings/cell_dropdown_list_options.html', {'members': members})
+
 
 #testing this out for checkboxes of attendee list
 # def load_attendees(request):
@@ -31,7 +30,7 @@ def index(request):
 class MeetingFormPage(FormView):
     Model = Meeting
     template_name = 'meetings/cell_form.html'
-    #fields = ('cell', 'member')
+    fields = ('cell', 'member')
     success_url = reverse_lazy('cell_form')
     form_class = MeetingForm
 

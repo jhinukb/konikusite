@@ -12,10 +12,18 @@ class MeetingForm(forms.ModelForm):
     class Meta:
         model = Meeting
         fields = ('cell', 'member')
-        # member_name= forms.CharField(label='What is your Cell?', widget=forms.Select(choices=CELL_CHOICES))
-        # email= forms.EmailField()
-        # cell = forms.CharField(label='What is your Cell?', widget=forms.Select(choices=CELL_CHOICES))
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['member'].queryset = Member.objects.none()
+
+    def __init__(self, *args, **kwargs):
+        super(MeetingForm, self).__init__(*args, **kwargs)
+        #sets fields initially to nothing for members
+        self.fields['member'].queryset = Member.objects.none()
+        print(self.data)
+        if 'cell' in self.data:
+            try:
+                cell_id = int(self.data.get('cell'))
+                self.fields['member'].queryset = Member.objects.filter(cells=cell_id).order_by('member_name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['member'].queryset = self.instance.cell.member_set.order_by('member_name')

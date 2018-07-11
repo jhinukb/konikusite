@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% comment %}
 
-This is the display for the 'Post Ad' form.
+This is the display for the 'MeetingForm' form.
 
 URL: cell_form/
 Model: Cell
 ModelForm: CellForm
 View: CellFormPage [FormView]
-View Return: HttpResponse : message - "Sweeeeeeeet."
+View Return: HttpResponse : message - "Success."
 
 * = preset when user is logged in.
 
@@ -30,12 +30,16 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
     font-size: 20px;
   }
 
+  #list {
+    font-color:black;
+  }
+
 </style>
-<a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+<!-- <a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> -->
 <form method="post" id="cellForm" data-members-url="{% url 'ajax_load_members' %}" novalidate>
 {% csrf_token %}
     <!-- *name -->
-    {{  form.non_field_errors }}
+    {{ form.non_field_errors }}
     <div class="fieldWrapper">
         {{ form.cell.errors }}
         <label for="id_name" id='cell_name'></label>
@@ -44,11 +48,12 @@ View Return: HttpResponse : message - "Sweeeeeeeet."
           </table>
     </div>
     <!-- <div>
-      <label for='checkbox'>Attendee List:</label>
-      <table id='checkbox'>
-        {{ form.member }}
-      </table>
-    </div> -->
+      <!- The attendee list is only members within the cell -->
+      <!-- <label for='checkbox' id='list'>Attendee List:</label>
+        {% for member in form.member %}
+        <input type='checkbox' value="{{ member.pk }}">{{ member }}</input>
+        {% endfor %} -->
+    <!-- </div> -->
     <button type="submit" id='next'>
       <label>Next</label>
         <i class="fa fa-thumb-tack"></i>
