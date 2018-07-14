@@ -1,5 +1,11 @@
 {% for member in members %}
-<label class="checkbox">
-    <input type="checkbox" name="tag[]" value="{{ member.pk }}" {{ member.member_name }}>
-</label>
+<input type="checkbox" value="{{ member.pk }}"/>
+<label>{{ member.member_name }}</label>
 {% endfor %}
+
+<!-- {% for member in members %}
+<input type="checkbox" id="field_label"
+       name="field.memberName"
+       {% if member.member_name %}checked{% endif %}>
+<label for="{{ field.id_for_label }}">{{ member.member_name }}</label>
+{% endfor %} -->

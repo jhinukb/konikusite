@@ -13,12 +13,15 @@ class MeetingForm(forms.ModelForm):
         model = Meeting
         fields = ('cell', 'member')
 
+        widgets = {
+            'attendees': forms.CheckboxSelectMultiple()
+        }
+
 
     def __init__(self, *args, **kwargs):
         super(MeetingForm, self).__init__(*args, **kwargs)
         #sets fields initially to nothing for members
         self.fields['member'].queryset = Member.objects.none()
-        print(self.data)
         if 'cell' in self.data:
             try:
                 cell_id = int(self.data.get('cell'))

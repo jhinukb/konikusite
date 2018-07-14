@@ -42,24 +42,44 @@ View Return: HttpResponse : message - "Success."
     {{ form.non_field_errors }}
     <div class="fieldWrapper">
         {{ form.cell.errors }}
-        <label for="id_name" id='cell_name'></label>
+        <label for="id_name" id='cell_name'>Cell:</label>
           <table id='t'>
-            {{ form.as_table }}
+            <!-- {{ form.as_table }} -->
+            {{ form.cell }}
           </table>
+          <button type="submit" id='next'>
+            <label>Next</label>
+              <i class="fa fa-thumb-tack"></i>
+          </button>
     </div>
-    <!-- <div>
-      <!- The attendee list is only members within the cell -->
-      <!-- <label for='checkbox' id='list'>Attendee List:</label>
+    <div>
+      <!-- The attendee list is only members within the cell -->
+        <label>Attendee List</label>
         {% for member in form.member %}
-        <input type='checkbox' value="{{ member.pk }}">{{ member }}</input>
-        {% endfor %} -->
-    <!-- </div> -->
-    <button type="submit" id='next'>
+        <input type="checkbox" value="{{ member.pk }}">{{ member }}
+        {% endfor %}
+        <label>Meeting Recorder: </label>
+        {{ form.member }}
+
+    </div>
+
+    <!-- <button type="submit" id='next'>
       <label>Next</label>
         <i class="fa fa-thumb-tack"></i>
-    </button>
+    </button> -->
+
 
 </form>
+  <!-- <div> -->
+    <!-- The attendee list is only members within the cell -->
+    <!-- <label for='checkbox' id='list'>Attendee List:</label>
+      <input type='checkbox'>
+        {{ form.member }}
+      </input>
+  </div> -->
+<!-- <form method="post" id="cellForm" data-members-url="{% url 'ajax_load_members' %}" novalidate>
+
+</form> -->
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
