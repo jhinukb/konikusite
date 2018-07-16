@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'meetings/cell_form.html' %}
 
 {% block content %}
 
@@ -25,6 +25,13 @@
 <form method="POST" action="/search">
   {% csrf_token %}
   <div class='fileLocation' id='file'>
+    <label>Attendee List</label>
+    {% for member in form.member %}
+    <input type="checkbox" value="{{ member.pk }}">{{ member }}
+    {% endfor %}
+    {{ form.cell }} 
+    <br>
+
     <label>File Location on Shared Drive:</label>
     <br>
     <input type="text" id='file_text' name="textfield">

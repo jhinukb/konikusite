@@ -42,7 +42,12 @@ class MeetingFormPage(FormView):
     success_url = reverse_lazy('cell_form')
     form_class = MeetingForm
 
+    # form = MeetingForm(request.POST)
+    # post.user = request.USER
+    # post.save()
+    # text = form.cleaned_data['post']
+    # form = MeetingForm()
     def form_valid(self, form):
-        #string inside reverse refers to another view function
-        return HttpResponseRedirect(reverse('work_review')) #currently goes back to same page
+        #string inside reverse refers to another view/url function
+        return HttpResponseRedirect(reverse('work_review')) #goes to work review url
         #return HttpResponse("Success!")

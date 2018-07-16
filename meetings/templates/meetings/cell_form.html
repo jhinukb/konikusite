@@ -48,7 +48,7 @@ View Return: HttpResponse : message - "Success."
             {{ form.cell }}
           </table>
           <button type="submit" id='next'>
-            <label>Next</label>
+            <label>Choose Attendees</label>
               <i class="fa fa-thumb-tack"></i>
           </button>
     </div>
@@ -60,7 +60,10 @@ View Return: HttpResponse : message - "Success."
         {% endfor %}
         <label>Meeting Recorder: </label>
         {{ form.member }}
-
+        <button type="submit" id='next'>
+          <label>Submit</label>
+            <i class="fa fa-thumb-tack"></i>
+        </button>
     </div>
 
     <!-- <button type="submit" id='next'>
