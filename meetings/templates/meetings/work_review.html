@@ -2,40 +2,80 @@
 
 {% block content %}
 
+<!-- Source Code: http://www.mkyong.com/jquery/how-to-add-remove-textbox-dynamically-with-jquery/ -->
+<html>
+<head>
+
 <style>
-  #file {
-    height: 15px;
-    font-size: 20px;
+	div{
+		padding:8px;
+	}
+  .txtOther {
+    display:none;
   }
-
-  #file_text {
-    width: 300px;
-    font-size: 15px;
-  }
-
-  #add {
-    font-size: 15px;
-    background-color: indigo;
-    color: white;
-    border-color: black;
-    border-width: 4px;
-  }
-
 </style>
-<form method="POST" action="/search">
-  {% csrf_token %}
-  <div class='fileLocation' id='file'>
-    <label>Attendee List</label>
-    {% for member in form.member %}
-    <input type="checkbox" value="{{ member.pk }}">{{ member }}
-    {% endfor %}
-    {{ form.cell }} 
-    <br>
 
-    <label>File Location on Shared Drive:</label>
-    <br>
-    <input type="text" id='file_text' name="textfield">
-    <button type="submit" id= 'add'>Add Another Location</button>
-  </div>
-</form>
+</head>
+
+<body>
+
+<h2> Work Review </h2>
+<body>
+<div id='TextBoxesGroup'>
+	<div id="TextBoxDiv1">
+		<label>File Location #1 : </label><input type='textbox' id='textbox1' >
+	</div>
+</div>
+<input type='button' value='Add File Location' id='addButton'>
+<input type='button' value='Remove File Location' id='removeButton'>
+
+<div>
+  <input type="checkbox" id="valid_nocom">Validated without comment<br>
+  <input type="checkbox" id="valid_com">Validated with comments<br>
+  <input type="checkbox" id="cannot_valid">Cannot yet be validated<br>
+  <input type="text" id="txtOther"/>
+  <input type="button" value="Add Work Review">
+  <input type="submit" value="Next">
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var counter = 2;
+    $("#addButton").click(function () {
+	if(counter>10){
+            alert("Only 10 textboxes allowed");
+            return false;
+	}
+	var newTextBoxDiv = $(document.createElement('div'))
+	     .attr("id", 'TextBoxDiv' + counter);
+	newTextBoxDiv.after().html('<label>File Location #'+ counter + ' : </label>' +
+	      '<input type="text" name="textbox' + counter +
+	      '" id="textbox' + counter + '" value="" >');
+	newTextBoxDiv.appendTo("#TextBoxesGroup");
+	counter++;
+     });
+     $("#removeButton").click(function () {
+   if(counter==1){
+          alert("No more textbox to remove");
+          return false;
+       }
+   counter--;
+        $("#TextBoxDiv" + counter).remove();
+     });
+  });
+  $("#valid_com").click(function () {
+    if ($(this).is(":checked")) {
+       $("#txtOther").show();
+    } else {
+       $("#txtOther").hide();
+    }
+ });
+</script>
+
+</body>
+
+</html>
+
+
 {% endblock %}

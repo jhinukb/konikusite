@@ -88,7 +88,7 @@ View Return: HttpResponse : message - "Success."
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   $("#id_cell").change(function () {
-    var url = $("#cellForm").attr('data-members-url');  // get the url of the `load_members` view
+    var url = $("#cellForm").attr('data-members-url', 'data-attendees-url');  // get the url of the `load_members` view
     var cellID = $(this).val();  // get the selected cell ID from the HTML input
 
     $.ajax({                       // initialize an AJAX request
