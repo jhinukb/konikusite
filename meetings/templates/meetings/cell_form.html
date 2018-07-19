@@ -65,25 +65,7 @@ View Return: HttpResponse : message - "Success."
             <i class="fa fa-thumb-tack"></i>
         </button>
     </div>
-
-    <!-- <button type="submit" id='next'>
-      <label>Next</label>
-        <i class="fa fa-thumb-tack"></i>
-    </button> -->
-
-
 </form>
-  <!-- <div> -->
-    <!-- The attendee list is only members within the cell -->
-    <!-- <label for='checkbox' id='list'>Attendee List:</label>
-      <input type='checkbox'>
-        {{ form.member }}
-      </input>
-  </div> -->
-<!-- <form method="post" id="cellForm" data-members-url="{% url 'ajax_load_members' %}" novalidate>
-
-</form> -->
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -97,7 +79,7 @@ View Return: HttpResponse : message - "Success."
         'cell': cellID       // add the cell id to the GET parameters
       },
       success: function (data) {   // `data` is the return of the `load_members` view function
-        $("#id_member").html(data);  // replace the contents of the member input with the data that came from the server
+        var lst = $("#id_member").html(data);  // replace the contents of the member input with the data that came from the server
       }
     });
 

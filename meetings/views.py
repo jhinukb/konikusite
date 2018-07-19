@@ -16,24 +16,34 @@ def load_members(request):
     members = Member.objects.filter(cells=cell_id).order_by('member_name')
     return render(request, 'meetings/cell_dropdown_list_options.html', {'members': members})
 
-def work_review(request):
-    # cell_id = request.GET.get('cell')
-    # members = Member.objects.filter(cells=cell_id).order_by('member_name')
-    return render(request, 'meetings/work_review.html')
-    #return render(request, 'meetings/work_review.html', {'members': members})
+
+# def work_review(request):
+#     return render(request, 'meetings/work_review.html')
+
+class WorkReview(FormView):
+    Model = Meeting
+    template_name = 'meetings/work_review.html'
+    fields = ('cell', 'member')
+    success_url = reverse_lazy('work_review')
+    form_class = MeetingForm
+    def form_valid(self, form):
+    #     #string inside reverse refers to another view/url function
+        return HttpResponseRedirect(reverse('objectives'))
+        #return HttpResponse("Success!")
+
+def objectives(request):
+    #return HttpResponse("Objectives Pageee.")
+    return render(request, 'meetings/objectives.html')
 
 #testing this out for checkboxes of attendee list
-def load_attendees(request):
-    cell_id = request.GET.get('cell')
-    #cell = Cell.objects.get(id=cell_id)
-    #member = member.cell.all().values('name', 'id')
-
-    members = Member.objects.filter(cells=cell_id).order_by('member_name')
-    return render(request, 'meetings/memberName_checkbox.html', {'members': members})
-
-def index(request):
-    #template_name = 'meetings/index.html'
-    return HttpResponse("Hello, world. You're at the meetings index.")
+# def load_attendees(request):
+#     cell_id = request.GET.get('cell')
+#     members = Member.objects.filter(cells=cell_id).order_by('member_name')
+#     return render(request, 'meetings/memberName_checkbox.html', {'members': members})
+#
+# def index(request):
+#     template_name = 'meetings/index.html'
+#     return HttpResponse("Hello, world. You're at the meetings index.")
 
 class MeetingFormPage(FormView):
     Model = Meeting
