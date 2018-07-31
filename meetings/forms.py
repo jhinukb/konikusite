@@ -1,27 +1,31 @@
 from django import forms
-from meetings.models import Cell, Objective, Member, Meeting
+from meetings.models import Cell, Objective, Member, Meeting, WorkReview
 
 # CELL_CHOICES = [
 #     ('tim', 'TIM'),
 #     ('crispr', 'CRISPR'),
 #     ('lotus', 'Lotus'),
 #     ]
-
+VAL_CHOICES=[('valid_nocom','Validated without comment'),
+         ('valid_com','Validated with comments'),
+         ('no_val', 'Cannot yet be validated')]
 #member = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=cell.members)
-class WorkReview(forms.Form):
+class WorkReviewForm(forms.ModelForm):
     class Meta:
-        model = Meeting
-        fields = ('cell', 'member')
-    file_loc = forms.CharField(max_length=100)
-    val1 = forms.CheckboxSelectMultiple()
-    val2 = forms.CheckboxSelectMultiple()
-    val3 = forms.CheckboxSelectMultiple()
+        model = WorkReview
+        fields = ('file_location', 'validate')# 'valid_com', 'valid_nocom', 'no_val')
+	file_location = forms.CharField(max_length=500)
+    validate = forms.ChoiceField(choices=VAL_CHOICES, widget=forms.RadioSelect())
+	# valid_com = forms.CharField(max_length=500)
+	# valid_nocom = forms.CharField(max_length=500)
+	# no_val = forms.CharField(max_length=500)
 
 class MeetingForm(forms.ModelForm):
-
+    # cell = forms.CharField(max_length=100)
+    # member = forms.CharField(max_length=100)
     class Meta:
         model = Meeting
-        fields = ('cell', 'member')
+        fields = ('cell', 'member', 'attendee_list')
         # widgets =
         #     'attendees': forms.CheckboxSelectMultiple()
         # }

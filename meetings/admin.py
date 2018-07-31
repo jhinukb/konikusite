@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Cell, Objective, Member, Meeting
+from .models import Cell, Objective, Member, Meeting, WorkReview
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
 # Register your models here.
@@ -10,6 +10,7 @@ admin.site.register(Cell)
 admin.site.register(Member)
 admin.site.register(Objective)
 admin.site.register(Meeting)
+admin.site.register(WorkReview)
 
 class EntityAdmin(admin.ModelAdmin):
     list_filter = (
