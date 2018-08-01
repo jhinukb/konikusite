@@ -1,7 +1,7 @@
 Meeting Tracker Website for the Biotechnology Company, Koniku. 
 Contains dropdowns for cell and member selection, objectives, feedback and more data that is stored into database. 
 Web Framework: Django
-Cloud Computing Platform: Amazon Web Servies
+Cloud Computing Platform: Amazon Web Services
 Backend: Python, PostgreSQL
 Frontend: HTML, CSS, JavaScript, JQuery
 
