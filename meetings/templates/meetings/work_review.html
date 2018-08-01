@@ -3,22 +3,11 @@
 {% block content %}
 
 <!-- Source Code: http://www.mkyong.com/jquery/how-to-add-remove-textbox-dynamically-with-jquery/ -->
-<html>
-<head>
-<form method='post' id='workreview_form' novalidate>
-{% csrf_token %}
-    <!-- *name -->
-    {{ form.non_field_errors }}
-    {{ form.file_location }}
-    {{ form.validate }}
-    <br>
-    <button type="submit">Submit</button>
-    <br>
 <style>
 	div{
 		padding:8px;
 	}
-  #txtOther, #txtNew {
+  #txtNew, #id_content_val, #id_content_noVal {
     display:none;
     width: 600px;
     height: 150px;
@@ -35,11 +24,6 @@
   #selection {
     font-size: 20px;
   }
-
-  /* This needs to work for all textboxes...loop? */
-  /* #textbox1 {
-    font-size: 15px;
-  } */
 
   #add_work{
     margin-top: 40px;
@@ -58,10 +42,40 @@
   }
 
 </style>
+
+<html>
+<head>
+<form method='post' id='workreview_form' novalidate>
+  <body>
+  <h2> Work Review </h2>
+  </body>
+{% csrf_token %}
+    <!-- *name -->
+    {{ form.non_field_errors }}
+    <label>File Location:</label>
+    {{ form.file_location }}<br><br>
+    <label id='selection'><b>Select the appropriate box:</b></label><br>
+    <!-- {{ form.content_val }} -->
+
+    <!-- {% for val in form.validate %}
+    <div class="myradio">
+        {{ val }}
+    </div>
+    {% endfor %}
+    <br> -->
+    {% for val in form.validate %}
+    <label for="{{ val.id_for_label }}">
+        <span class="radio">{{ val.tag }}</span>
+        {{ val.choice_label }}<br>
+    </label>
+    {% endfor %}
+    <td valign='top' id='a'>{{ form.content_val }}</td>
+    <!-- <td valign='top' id='b'>{{ form.content_noVal }}</td> -->
+    <br><button type="submit">Submit</button>
+    <br>
+
 </head>
-<body>
-<h2> Work Review </h2>
-<body>
+
 <div class="container">
   <div id='TextBoxesGroup'>
   	<div id="TextBoxDiv1">
@@ -70,37 +84,11 @@
   </div>
   <input type='button' value='Add File Location' id='addButton' class='btn_add'>
   <input type='button' value='Remove File Location' id='removeButton'>
-
   <div class="forms_button">
-    <br><label id="selection"><b>Select the appropriate box (remember to comment to tag other Cells):</b></label><br><br>
-    <input type="radio" id="valid_nocom" name="validate"/>Validated without comment<br>
-    <input type="radio" id="valid_com" name="validate"/>Validated with comments<br>
-    <input type="radio" id="cannot_valid" name="validate"/>Cannot yet be validated<br><br>
-    <textarea class="longInput" id="txtOther" cols="30" rows="10" placeholder="Enter comments here"></textarea>
-    <textarea class="longInput" id="txtNew" cols="30" rows="10" placeholder="Enter why this work cannot yet be validated"></textarea>
+    <!-- <textarea class="longInput" id="txtOther" cols="30" rows="10" placeholder="Enter comments here"></textarea> -->
+    <!-- <textarea class="longInput" id="txtNew" cols="30" rows="10" placeholder="Enter why this work cannot yet be validated"></textarea> -->
     <br>
   </div>
-</div>
-
-<!-- <div class="container_orig">
-  <div class='TextBoxesGroup1'>
-  	<div id="TextBoxDiv1">
-  		<label>File Location #1 : </label><input type='textbox' id='textbox1'>
-  	</div>
-  </div>
-  <input type='button' value='Add File Location' id='addButton' class='btn_add'>
-  <input type='button' value='Remove File Location' id='removeButton'>
-
-  <div class="forms_button">
-    <br><label id="selection"><b>Select the appropriate box (remember to comment to tag other Cells):</b></label><br><br>
-    <input type="radio" id="valid_nocom" name="validate"/>Validated without comment<br>
-    <input type="radio" id="valid_com" name="validate"/>Validated with comments<br>
-    <input type="radio" id="cannot_valid" name="validate"/>Cannot yet be validated<br><br>
-    <textarea class="longInput" id="txtOther" cols="30" rows="10" placeholder="Enter comments here"></textarea>
-    <textarea class="longInput" id="txtNew" cols="30" rows="10" placeholder="Enter why this work cannot yet be validated"></textarea>
-    <br>
-  </div>
-</div> -->
 
 <div class ="append_cont"></div>
 <input type="button" value="Add Work Review" id="add_work">
@@ -109,73 +97,71 @@
     <i class="fa fa-thumb-tack"></i>
 </button>
 
+<!-- {% for val in form.validate %}
+<input type="radio" value="{{ validate.pk }}">{{ val }}
+{% endfor %} -->
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    var counter = 2;
-    $(".btn_add").click(function () {
-	var newTextBoxDiv = $(document.createElement('div'))
-	     .attr("id", 'TextBoxDiv' + counter);
-	newTextBoxDiv.after().html('<label>File Location #'+ counter + ' : </label>' +
-	      '<input type="text" name="textbox' + counter +
-	      '" id="textbox' + counter + '" value="" >');
-	newTextBoxDiv.appendTo("#TextBoxesGroup"); //changed div to reference class name instead of id
-	counter++;
-     });
-     $("#removeButton").click(function () {
-   if(counter==1){
-          alert("No more textbox to remove");
-          return false;
-       }
-   counter--;
-        $("#TextBoxDiv" + counter).remove();
-     });
-  });
-  $("#valid_com").click(function () {
-    if ($(this).is(":checked")) {
-      if (!($("#txtNew").is(":hidden"))) {
-        $("#txtNew").hide();
+  $(document).ready(function(){
+      var counter = 2;
+      $(".btn_add").click(function () {
+  	var newTextBoxDiv = $(document.createElement('div'))
+  	     .attr("id", 'TextBoxDiv' + counter);
+  	newTextBoxDiv.after().html('<label>File Location #'+ counter + ' : </label>' +
+  	      '<input type="text" name="textbox' + counter +
+  	      '" id="textbox' + counter + '" value="" >');
+  	newTextBoxDiv.appendTo("#TextBoxesGroup"); //changed div to reference class name instead of id
+  	counter++;
+       });
+       $("#removeButton").click(function () {
+     if(counter==1){
+            alert("No more textbox to remove");
+            return false;
+         }
+     counter--;
+          $("#TextBoxDiv" + counter).remove();
+       });
+    });
+    $("#id_validate_1").click(function () {
+      if ($(this).is(":checked")) {
+        if (!($("#id_content_val").is(":hidden"))) {
+          $("#id_content_val").hide();
+        }
+          //document.getElementById('id_content_val').style.display = '';
+          // $("#id_content_val").val('Enter comments here.')
+          $("#id_content_val").attr('placeholder', 'Enter comments here.');
+          $("#id_content_val").show(); //id was original txtOther
+      } else {
+         $("#id_content_val").hide();
       }
-       $("#txtOther").show();
-    } else {
-       $("#txtOther").hide();
-    }
- });
- $("#cannot_valid").click(function () {
-   if ($(this).is(":checked")) {
-     if (!($("#txtOther").is(":hidden"))) {
-       $("#txtOther").hide();
-     }
-      $("#txtNew").show();
-   } else {
-      $("#txtNew").hide();
-   }
- });
-  $("#valid_nocom").click(function () {
-    if ($(this).is(":checked")) {
-      $("#txtOther").hide();
-      $("#txtNew").hide();
+   });
+   $("#id_validate_2").click(function () {
+     if ($(this).is(":checked")) {
+       if (!($("#id_content_val").is(":hidden"))) {
+         $("#id_content_val").hide();
+       }
+        // $("#id_content_noVal").show();
+        $("#id_content_val").attr('placeholder', 'Enter why this work cannot yet be validated.');
+        $("#id_content_val").show();
+     } else {
+        $("#id_content_val").hide();
      }
    });
-   // $("#add_work").click(function () {
-   //   $("#container").append("hi");
-   // });
-  //  $(function(){
-  //   $('#add_work').click(function(){
-  //      var content = $('.container').html();
-  //      $(this).html(content);
-  //   });
-  // });
-  $(document).ready(function (){
-    $('#add_work').click(function (){
-          // $('.append_cont').append($('.container').html())
-          // console.log($('.container').html());
-          $('.container').clone().appendTo('.append_cont');
-      })
+    $("#id_validate_0").click(function () {
+      if ($(this).is(":checked")) {
+        $("#id_content_val").hide();
+        // $("#id_content_noVal").hide();
+       }
+     });
 
-    });
-   // console.log(lst + cellID);
-   // console.log(MeetingForm.members);
+    $(document).ready(function (){
+      $('#add_work').click(function (){
+            $('.container').clone().appendTo('.append_cont');
+        })
+      });
+
 </script>
 </body>
 </form>

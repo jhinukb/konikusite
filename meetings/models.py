@@ -46,12 +46,23 @@ class WorkReview(models.Model):
 	title = models.CharField(max_length=500, default="title def")
 	file_location = models.CharField(max_length=500)
 	validate = models.CharField(max_length=500, choices=VAL_CHOICES)
+	content_val = models.TextField(default='def val')
+	# valid_com_txt = models.TextArea(default="val")
+	# no_valid_txt = models.TextArea(default="val")
 	# validate = models.BooleanField('Validation: ', default=True)
-	# valid_com = models.CharField(max_length=500, default="val")
 	# valid_nocom = models.CharField(max_length=500, default="val")
 	# no_val = models.CharField(max_length=500, default="val")
 	def __str__(self):
-		return self.title
+		return self.file_location
+
+	# def val_text(self):
+	#     if self.validate == 'Validated with comments':
+	# 		# display textbox
+	# 		return valid_com_txt
+	# 	elif self.validate == 'Cannot yet be validated':
+	# 		return no_valid_txt
+	# 	else:
+	# 		return ''
 
 class Meeting(models.Model):
 	cell = models.ForeignKey(Cell, on_delete=models.CASCADE)

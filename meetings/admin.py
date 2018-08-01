@@ -11,6 +11,11 @@ admin.site.register(Member)
 admin.site.register(Objective)
 admin.site.register(Meeting)
 admin.site.register(WorkReview)
+class WorkReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'file_location',
+        'validate',
+    )
 
 class EntityAdmin(admin.ModelAdmin):
     list_filter = (

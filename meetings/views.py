@@ -21,6 +21,10 @@ def load_members(request):
             meeting.save()
     return render(request, 'meetings/cell_dropdown_list_options.html', {'members': members})
 
+# def val_text(request):
+#     val_choice = request.GET.get('validate')
+#     if val_choice
+
 class WorkReviewPage(FormView):
     Model = WorkReview
     template_name = 'meetings/work_review.html'
