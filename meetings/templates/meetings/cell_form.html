@@ -34,7 +34,18 @@ View Return: HttpResponse : message - "Success."
     font-color:black;
   }
 
+  #cellForm {
+    margin-left: 20px;
+    margin-right: 500px;
+  }
+
 </style>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
 <!-- <a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> -->
 <form method="post" id="cellForm" data-members-url="{% url 'ajax_load_members' %}" novalidate>
 {% csrf_token %}
@@ -64,6 +75,9 @@ View Return: HttpResponse : message - "Success."
           <label>Submit</label>
             <i class="fa fa-thumb-tack"></i>
         </button>
+
+        <!-- <a href="{% url 'work_review' %}">Clic here</a> -->
+        <!-- <a href="work_review">Clic here</a> -->
     </div>
 </form>
 

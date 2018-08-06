@@ -7,6 +7,10 @@ from django.utils import timezone
 VAL_CHOICES=[('valid_nocom','Validated without comment'),
          ('valid_com','Validated with comments'),
          ('no_val', 'Cannot yet be validated')]
+
+COMP_CHOICES = [('complete', 'complete'),
+		 ('incomplete', 'incomplete'),
+		 ('changed', 'changed')]
 # Create your models here.
 class Cell(models.Model):
 	cell_name = models.CharField(max_length=200)
@@ -28,46 +32,36 @@ class Member(models.Model):
 	     ordering = ('member_name',)
 
 class Objective(models.Model):
-	objective_text = models.CharField(max_length=400, default = 'val')
-	cell = models.ForeignKey(Cell, on_delete=models.CASCADE) #or obj can be connected to Meeting model
-	completion_status = models.CharField(max_length=400, default = 'val')
-	incompletion_reason = models.CharField(max_length=400, default = 'val')
-	changed_reason = models.CharField(max_length=400, default = 'val')
-	#expected supply arrival date
-	exp_supply_dt = models.DateTimeField(default=timezone.now)
-	#expected objective completion date
-	exp_obj_dt = models.DateTimeField(default=timezone.now)
+	objective_text = models.TextField(default = 'val')
 	owner = models.CharField(max_length=400, default = 'val')
-	cell_output = models.CharField(max_length=400, default = 'default cell output text')
+	completion_status = models.CharField(max_length=400, choices=COMP_CHOICES)
+	# cell = models.ForeignKey(Cell, on_delete=models.CASCADE) #or obj can be connected to Meeting model
+	# incompletion_reason = models.CharField(max_length=400, default = 'val')
+	# changed_reason = models.CharField(max_length=400, default = 'val')
+	# #expected supply arrival date
+	# exp_supply_dt = models.DateTimeField(default=timezone.now)
+	# #expected objective completion date
+	# exp_obj_dt = models.DateTimeField(default=timezone.now)
+	# owner = models.CharField(max_length=400, default = 'val')
+	# cell_output = models.CharField(max_length=400, default = 'default cell output text')
 	def __str__(self):
 		return self.objective_text
 
 class WorkReview(models.Model):
-	title = models.CharField(max_length=500, default="title def")
+	#title = models.CharField(max_length=500, default="title def")
 	file_location = models.CharField(max_length=500)
 	validate = models.CharField(max_length=500, choices=VAL_CHOICES)
 	content_val = models.TextField(default='def val')
-	# valid_com_txt = models.TextArea(default="val")
-	# no_valid_txt = models.TextArea(default="val")
-	# validate = models.BooleanField('Validation: ', default=True)
-	# valid_nocom = models.CharField(max_length=500, default="val")
-	# no_val = models.CharField(max_length=500, default="val")
 	def __str__(self):
 		return self.file_location
-
-	# def val_text(self):
-	#     if self.validate == 'Validated with comments':
-	# 		# display textbox
-	# 		return valid_com_txt
-	# 	elif self.validate == 'Cannot yet be validated':
-	# 		return no_valid_txt
-	# 	else:
-	# 		return ''
 
 class Meeting(models.Model):
 	cell = models.ForeignKey(Cell, on_delete=models.CASCADE)
 	member = models.ForeignKey(Member, on_delete=models.CASCADE)
 	attendee_list = models.BooleanField(default=False)
+	# file_location = models.CharField(max_length=500, default='file val')
+	# validate = models.CharField(max_length=500, choices=VAL_CHOICES, default='val')
+	# content_val = models.TextField(default='def val')
 	#Time
 	date_recorded = models.DateTimeField(default=timezone.now)
         def was_published_recently(self):

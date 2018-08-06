@@ -41,10 +41,19 @@
     right:0;
   }
 
+  #workreview_form {
+    margin-left: 20px;
+    margin-right: 500px;
+  }
+
 </style>
 
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
 <form method='post' id='workreview_form' novalidate>
   <body>
   <h2> Work Review </h2>
@@ -56,7 +65,9 @@
     {{ form.file_location }}<br><br>
     <label id='selection'><b>Select the appropriate box:</b></label><br>
     <!-- {{ form.content_val }} -->
-
+    {% for form in formset %}
+      <label>{{ form.file_location.label }}</label>
+    {% endfor %}
     <!-- {% for val in form.validate %}
     <div class="myradio">
         {{ val }}
@@ -74,7 +85,7 @@
     <br><button type="submit">Submit</button>
     <br>
 
-</head>
+
 
 <div class="container">
   <div id='TextBoxesGroup'>
