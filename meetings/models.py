@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import datetime
 from django.db import models
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 
 VAL_CHOICES=[('valid_nocom','Validated without comment'),
          ('valid_com','Validated with comments'),
@@ -35,6 +36,11 @@ class Objective(models.Model):
 	objective_text = models.TextField(default = 'val')
 	owner = models.CharField(max_length=400, default = 'val')
 	completion_status = models.CharField(max_length=400, choices=COMP_CHOICES)
+	member1 = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, related_name='member1')
+	member2 = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, related_name='member2')
+	#percent responsibility for each member
+	res1 = models.CharField(max_length=400, default = 'val')
+	res2 = models.CharField(max_length=400, default = 'val')
 	# cell = models.ForeignKey(Cell, on_delete=models.CASCADE) #or obj can be connected to Meeting model
 	# incompletion_reason = models.CharField(max_length=400, default = 'val')
 	# changed_reason = models.CharField(max_length=400, default = 'val')
@@ -47,18 +53,11 @@ class Objective(models.Model):
 	def __str__(self):
 		return self.objective_text
 
-class WorkReview(models.Model):
-	#title = models.CharField(max_length=500, default="title def")
-	file_location = models.CharField(max_length=500)
-	validate = models.CharField(max_length=500, choices=VAL_CHOICES)
-	content_val = models.TextField(default='def val')
-	def __str__(self):
-		return self.file_location
-
 class Meeting(models.Model):
 	cell = models.ForeignKey(Cell, on_delete=models.CASCADE)
 	member = models.ForeignKey(Member, on_delete=models.CASCADE)
-	attendee_list = models.BooleanField(default=False)
+	attendee_list = MultiSelectField()
+	# work_review = models.ForeignKey(WorkReview, on_delete=models.CASCADE, default=WorkReview('val', 'Validated without comment'))
 	# file_location = models.CharField(max_length=500, default='file val')
 	# validate = models.CharField(max_length=500, choices=VAL_CHOICES, default='val')
 	# content_val = models.TextField(default='def val')
@@ -68,7 +67,19 @@ class Meeting(models.Model):
 			now = timezone.now()
 			return now - datetime.timedelta(days=14) <= self.date_recorded <= now
 	next_meeting_date = models.DateTimeField(default=timezone.now)
-	# work_review = models.ForeignKey(WorkReview, on_delete=models.CASCADE)
+	def __str__(self):
+		return str(self.id)
+
+DEFAULT_MEETING_ID = 1
+class WorkReview(models.Model):
+	#title = models.CharField(max_length=500, default="title def")
+	member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
+	file_location = models.CharField(max_length=500)
+	validate = models.CharField(max_length=500, choices=VAL_CHOICES)
+	content_val = models.TextField(default='def val')
+	meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE, null=True)
+	def __str__(self):
+		return self.file_location
 
 # class CellForm(models.Model):
 # 	cell_form_name = models.CharField(max_length=200, default = 'placeholder name')

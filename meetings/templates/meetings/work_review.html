@@ -61,6 +61,13 @@
 {% csrf_token %}
     <!-- *name -->
     {{ form.non_field_errors }}
+    <label>Member:</label>
+    {{ form.member }}
+    <!-- <select>
+      {% for member in form.member %}
+      <option value="{{ member.pk }}">{{ member.member_name }}</option>
+      {% endfor %}
+    </select><br><br> -->
     <label>File Location:</label>
     {{ form.file_location }}<br><br>
     <label id='selection'><b>Select the appropriate box:</b></label><br>
@@ -87,7 +94,10 @@
 
 
 
-<div class="container">
+    {{ form.meeting }}
+
+
+<!-- <div class="container">
   <div id='TextBoxesGroup'>
   	<div id="TextBoxDiv1">
   		<label>File Location #1 : </label><input type='textbox' id='textbox1'>
@@ -96,10 +106,10 @@
   <input type='button' value='Add File Location' id='addButton' class='btn_add'>
   <input type='button' value='Remove File Location' id='removeButton'>
   <div class="forms_button">
-    <!-- <textarea class="longInput" id="txtOther" cols="30" rows="10" placeholder="Enter comments here"></textarea> -->
-    <!-- <textarea class="longInput" id="txtNew" cols="30" rows="10" placeholder="Enter why this work cannot yet be validated"></textarea> -->
+    <textarea class="longInput" id="txtOther" cols="30" rows="10" placeholder="Enter comments here"></textarea>
+    <textarea class="longInput" id="txtNew" cols="30" rows="10" placeholder="Enter why this work cannot yet be validated"></textarea>
     <br>
-  </div>
+  </div> -->
 
 <div class ="append_cont"></div>
 <input type="button" value="Add Work Review" id="add_work">

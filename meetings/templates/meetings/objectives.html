@@ -8,9 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
-<h2>
-  Objectives
-</h2>
 
 <style>
   #txtNew {
@@ -21,10 +18,19 @@
     margin-left: 20px;
     margin-right: 500px;
   }
+
+  #obj {
+    margin
+  }
 </style>
+
+
 
 <form method='post' id='objective_form' novalidate>
 {% csrf_token %}
+<h2>
+  Objectives
+</h2>
   {% for hidden_field in form.hidden_fields %}
     {{ hidden_field }}
   {% endfor %}

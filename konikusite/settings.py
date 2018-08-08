@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_admin_listfilter_dropdown',
     'widget_tweaks',
+    'formtools',
+    'multiselectfield'
 ]
 
 MIDDLEWARE = [

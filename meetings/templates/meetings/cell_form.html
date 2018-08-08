@@ -17,28 +17,23 @@ View Return: HttpResponse : message - "Success."
 
 <style>
   #next {
-    background-color: indigo; /* Green */
-    border: none;
+    background-color: indigo;
+    /* border: none; */
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-  }
-  #t {
-    font-size: 20px;
+    /* padding: 10px 30px; */
+    /* text-align: center; */
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    /* font-size: 20px; */
   }
 
   #list {
     font-color:black;
   }
-
   #cellForm {
     margin-left: 20px;
     margin-right: 500px;
   }
-
 </style>
 
 <head>
@@ -58,10 +53,8 @@ View Return: HttpResponse : message - "Success."
             <!-- {{ form.as_table }} -->
             {{ form.cell }}
           </table>
-          <button type="submit" id='next'>
-            <label>Choose Attendees</label>
-              <i class="fa fa-thumb-tack"></i>
-          </button>
+          <button type="submit" id='next'>Choose Attendees</button>
+
     </div>
     <div>
       <!-- The attendee list is only members within the cell -->
@@ -71,10 +64,9 @@ View Return: HttpResponse : message - "Success."
         {% endfor %}
         <label>Meeting Recorder: </label>
         {{ form.member }}
-        <button type="submit" id='next'>
-          <label>Submit</label>
-            <i class="fa fa-thumb-tack"></i>
-        </button>
+        <!-- <label>Take Attendance</label> -->
+        <!-- {{ form.attendee_list }} <br> -->
+        <button type="submit" id='next'>Submit</button>
 
         <!-- <a href="{% url 'work_review' %}">Clic here</a> -->
         <!-- <a href="work_review">Clic here</a> -->
@@ -86,7 +78,6 @@ View Return: HttpResponse : message - "Success."
   $("#id_cell").change(function () {
     var url = $("#cellForm").attr('data-members-url', 'data-attendees-url');  // get the url of the `load_members` view
     var cellID = $(this).val();  // get the selected cell ID from the HTML input
-
     $.ajax({                       // initialize an AJAX request
       url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-members/)
       data: {
@@ -94,9 +85,9 @@ View Return: HttpResponse : message - "Success."
       },
       success: function (data) {   // `data` is the return of the `load_members` view function
         var lst = $("#id_member").html(data);  // replace the contents of the member input with the data that came from the server
+        // var lst1 = $("id_attendee_list").html(data);
       }
     });
-
   });
 </script>
 {% endblock %}
