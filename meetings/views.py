@@ -45,15 +45,14 @@ def load_members(request):
 def objective_review(request):
     # return render(request, 'meetings/cell_dropdown_list_options.html', {'members': members})
     obj_data = Objective.objects.latest('id')
-    cell = request.session['cell_id']
-    #next 3 lines commented out in working version
+    # # cell = request.session['cell_id']
+    # #next 3 lines commented out in working version
     # obj_data = {
-    # "obj_latest": obj,
+    # "obj_latest": obj_data,
     # }
-    # return render(request, 'meetings/objectives_review.html', {'obj_data': obj_data})
+    return render(request, 'meetings/objectives_review.html', {'obj_data': obj_data})
     # return render_to_response("meetings/objectives_review.html", obj_data, context_instance=RequestContext(request))
-    return HttpResponse(cell)
-
+    # return HttpResponse("Hello, world. You're at the meetings index.")
 
 class ObjectivePage(FormView):
     Model = Objective
@@ -80,6 +79,13 @@ class WorkReviewPage(FormView):
     # fields = ('file_location', 'validate', 'meeting', 'member')
     success_url = reverse_lazy('work_review')
     form_class = WorkReviewForm
+    # meeting_update = Meeting.objects.last()
+
+    # def get_form_kwargs(self):
+    #     kwargs = super(WorkReviewPage, self).get_form_kwargs()
+    #     kwargs.update({'meeting_update': self.meeting_update})
+    #     return kwargs
+
     def form_valid(self, form):
         if form.is_valid():
             # form.cleaned_data['meeting'] = Meeting.objects.last() #this line isnt working properly
@@ -87,7 +93,7 @@ class WorkReviewPage(FormView):
             text = form.cleaned_data['file_location']
             txt2 = form.cleaned_data['validate']
             # meeting = Meeting.objects.last()
-            form = WorkReviewForm()
+            # form = WorkReviewForm()
             return HttpResponseRedirect(reverse('objectives')) #return HttpResponseRedirect(reverse('objectives'))
         args = {'form': form, 'text': text, 'txt2': txt2}
         return HttpResponseRedirect(reverse('objectives'))
@@ -114,6 +120,14 @@ def objectives(request):
 #     template_name = 'meetings/index.html'
 #     return HttpResponse("Hello, world. You're at the meetings index.")
 #
+
+# class ObjectiveReviewPage(TemplateView):
+#     Model = Objective
+#     template_name = 'meetings/objective_review.html'
+#     success_url = reverse_lazy('objective_review')
+#     form_class = ObjectiveForm
+#     return HttpResponseRedirect(reverse('objectives'))
+
 class MeetingFormPage(FormView):
     Model = Meeting
     template_name = 'meetings/cell_form.html'
@@ -125,9 +139,10 @@ class MeetingFormPage(FormView):
     #     return HttpResponseRedirect(reverse('work_review')) #goes to work review url
     def form_valid(self, form):
         if form.is_valid():
+            # request.session['cell'] = meeting_update
             form.save()
             text = form.cleaned_data['cell']
-            form = WorkReviewForm()
+            # form = MeetingForm()
             return HttpResponseRedirect(reverse('work_review'))        # return HttpResponseRedirect(reverse('objectives'))
         args = {'form': form, 'text': text}
         return render(request, self.template_name, args)

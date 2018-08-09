@@ -10,6 +10,7 @@ COMP_CHOICES = [('complete', 'complete'),
 #   def render(self):
 #     return mark_safe(u'\n'.join([u'%s\n' % w for w in self]))
 
+member_list = Member.objects.none()
 class ObjectiveForm(forms.ModelForm):
     class Meta:
         model = Objective
@@ -44,14 +45,15 @@ class WorkReviewForm(forms.ModelForm):
 	file_location = forms.CharField(max_length=500)
     validate = forms.ChoiceField(choices=VAL_CHOICES, widget=forms.RadioSelect())
     content_val = forms.CharField(widget=forms.Textarea)
-    meeting = Meeting.objects.latest(field_name='id') #this line is being used
+    # meeting = Meeting.objects.last() #this line is being used
     # member = Member.objects.filter(cells=meeting.cell.id).order_by('member_name')
     # meeting.widget = meeting.hidden_widget()
     def __init__(self, *args, **kwargs):
+        # meeting_update = kwargs.pop('meeting_update')
         super(WorkReviewForm, self).__init__(*args, **kwargs)
-        # meeting = Meeting.objects.last()
+        self.meeting = Meeting.objects.last()
         # self.meeting = Meeting.objects.last()
-        self.fields['member'].queryset = Member.objects.filter(cells=self.meeting.cell.id).order_by('member_name')
+        self.fields['member'].queryset = Member.objects.filter(cells=self.meeting.cell).order_by('member_name')
 
     def add_fields(self):
         super(WorkReviewForm, self).add_fields(self)
@@ -74,6 +76,7 @@ class MeetingForm(forms.ModelForm):
             try:
                 cell_id = int(self.data.get('cell'))
                 self.fields['member'].queryset = Member.objects.filter(cells=cell_id).order_by('member_name')
+                # member_list = self.fields['member'].queryset
                 # self.fields['attendee_list'].queryset = forms.MultipleChoiceField(
                 #     label="attendees",
                 #     required=False,

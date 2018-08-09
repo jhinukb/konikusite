@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^workreview/$', WorkReviewPage.as_view(), name='work_review'),
     url(r'objectives/', ObjectivePage.as_view(), name='objectives'),
     url(r'objectives_review/', views.objective_review, name='objectives_review')
-    # url(r'objectives/', views.objectives, name='objectives')
+    # url(r'obj_review_page/', ObjectiveReviewPage.as_view(), name='obj_review_page')
     #url(r'^$', views.load_cellNames, name='load')
     # url(r'^(?P<cell_id>[0-9]+)/$', views.load_cellNames, name='detail')
 ]
