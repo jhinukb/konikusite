@@ -9,6 +9,15 @@
     margin-left: 20px;
     margin-right: 500px;
   }
+
+  .text {
+    font-size: 20px;
+  }
+
+  #ob {
+    color: indigo;
+    font-weight: bold;
+  }
 </style>
 
 <head>
@@ -21,17 +30,20 @@
 <h2>
 Objectives Review
 </h2>
-  <label>Objective:</label>
-  {{ obj_data.objective_text }}
-  <br><label>Objective Owner 1:</label>
-  {{ obj_data.member1 }}
-  <br><label>% Responsiblity:</label>
-  {{ obj_data.res1 }}
-  <br><label>Objective Owner 2:</label>
-  {{ obj_data.member2 }}
-  <br><label>% Responsiblity:</label>
-  {{ obj_data.res2 }}
-
+  <div class='text'>
+    <tr>
+      <td><label id='ob'>Objective:</label>
+      {{ obj_data.objective_text }}</td>
+      <br><label id='ob'>Objective Owner 1:</label>
+      {{ obj_data.member1 }}
+      <br><label id='ob'>% Responsiblity:</label>
+      {{ obj_data.res1 }}
+      <br><label id='ob'>Objective Owner 2:</label>
+      {{ obj_data.member2 }}
+      <br><label id='ob'>% Responsiblity:</label>
+      {{ obj_data.res2 }}
+    </tr>
+  </div>
 
 </form>
 </html>

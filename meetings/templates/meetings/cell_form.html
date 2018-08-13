@@ -58,7 +58,7 @@ View Return: HttpResponse : message - "Success."
     </div>
     <div>
       <!-- The attendee list is only members within the cell -->
-        <label>Attendee List</label>
+        <label>Attendee List</label><br>
         {% for member in form.member %}
         <input type="checkbox" value="{{ member.pk }}">{{ member }}
         {% endfor %}
@@ -66,7 +66,7 @@ View Return: HttpResponse : message - "Success."
         {{ form.member }}
         <!-- <label>Take Attendance</label> -->
         <!-- {{ form.attendee_list }} <br> -->
-        <button type="submit" id='next'>Submit</button>
+        <button type="submit" id='next'>Next</button>
 
         <!-- <a href="{% url 'work_review' %}">Clic here</a> -->
         <!-- <a href="work_review">Clic here</a> -->

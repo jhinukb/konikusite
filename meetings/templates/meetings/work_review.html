@@ -33,18 +33,25 @@
     right:0;
   }
 
-  #next {
+  /* #next {
     margin-top: 40px;
     margin-right: 40px;
     position:absolute;
     top:0;
     right:0;
-  }
+
+  } */
 
   #workreview_form {
     margin-left: 20px;
     margin-right: 500px;
   }
+
+  #next {
+      background-color: indigo;
+      color: white;
+  }
+
 
 </style>
 
@@ -89,12 +96,12 @@
     {% endfor %}
     <td valign='top' id='a'>{{ form.content_val }}</td>
     <!-- <td valign='top' id='b'>{{ form.content_noVal }}</td> -->
-    <br><button type="submit">Submit</button>
+    <br><button type="submit" id='next'>Next</button>
     <br>
 
 
 
-    {{ form.meeting.id }}
+    <!-- {{ form.meeting.id }} -->
 
 
 <!-- <div class="container">
@@ -111,12 +118,12 @@
     <br>
   </div> -->
 
-<div class ="append_cont"></div>
+<!-- <div class ="append_cont"></div>
 <input type="button" value="Add Work Review" id="add_work">
 <button type="submit" id='next'>
   <label>Next</label>
     <i class="fa fa-thumb-tack"></i>
-</button>
+</button> -->
 
 <!-- {% for val in form.validate %}
 <input type="radio" value="{{ validate.pk }}">{{ val }}

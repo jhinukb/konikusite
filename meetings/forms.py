@@ -77,13 +77,6 @@ class MeetingForm(forms.ModelForm):
                 cell_id = int(self.data.get('cell'))
                 self.fields['member'].queryset = Member.objects.filter(cells=cell_id).order_by('member_name')
                 # member_list = self.fields['member'].queryset
-                # self.fields['attendee_list'].queryset = forms.MultipleChoiceField(
-                #     label="attendees",
-                #     required=False,
-                #     help_text="Select Meeting Attendees",
-                #     widget=forms.CheckboxSelectMultiple,
-                #     choices=Member.objects.filter(cells=cell_id).order_by('member_name'),
-                #     )
                 #self.fields['attendee_list'].queryset = Member.objects.filter(cells=cell_id).order_by('member_name')
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty Member queryset
