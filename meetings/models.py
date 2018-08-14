@@ -63,9 +63,9 @@ class Meeting(models.Model):
 	# content_val = models.TextField(default='def val')
 	#Time
 	date_recorded = models.DateTimeField(default=timezone.now)
-        def was_published_recently(self):
-			now = timezone.now()
-			return now - datetime.timedelta(days=14) <= self.date_recorded <= now
+	    # def was_published_recently(self):
+		# 	now = timezone.now()
+		# 	return now - datetime.timedelta(days=14) <= self.date_recorded <= now
 	next_meeting_date = models.DateTimeField(default=timezone.now)
 	def __str__(self):
 		return str(self.id)

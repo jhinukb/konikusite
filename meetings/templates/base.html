@@ -23,13 +23,22 @@
         color:indigo;
         font-family: 'Helvetica Neue', sans-serif;
         font-size: 40px;
+        text-align: center;
       }
+
+      #b {
+        background-color: #CCCCFF;
+        opacity: 20;
+
+      }
+
     </style>
   </head>
-  <body>
+  <body id='b'>
     <!-- <a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> -->
-    <h1>Koniku Meeting Tracker</h1>
-    <!-- <img src="{% static "koniku.jpg" %}"> -->
+    <img src="{% static "koniku.png" %}" align='center'>
+    <!-- <br><br><br> -->
+    <h1>Meeting Tracker</h1>
     <!-- 'templates/meetings/koniku.jpg' -->
     <hr>
     {% block content %}

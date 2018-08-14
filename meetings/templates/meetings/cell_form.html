@@ -33,7 +33,12 @@ View Return: HttpResponse : message - "Success."
   #cellForm {
     margin-left: 20px;
     margin-right: 500px;
+    /* background-color: #99CCFF; */
   }
+
+  /* #b {
+    background-color: #9999FF;
+  } */
 </style>
 
 <head>
@@ -41,6 +46,8 @@ View Return: HttpResponse : message - "Success."
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
+
+<body id='b'>
 <!-- <a href="{% url 'cell_form' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> -->
 <form method="post" id="cellForm" data-members-url="{% url 'ajax_load_members' %}" novalidate>
 {% csrf_token %}
@@ -72,6 +79,7 @@ View Return: HttpResponse : message - "Success."
         <!-- <a href="work_review">Clic here</a> -->
     </div>
 </form>
+</body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
