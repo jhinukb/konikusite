@@ -31,13 +31,30 @@ View Return: HttpResponse : message - "Success."
     font-color:black;
   }
   #cellForm {
-    margin-left: 20px;
-    margin-right: 500px;
+    /* margin-left: 20px; */
+    /* margin-right: 500px; */
+    font-size: 20px;
+    text-align: center;
     /* background-color: #99CCFF; */
   }
 
+  #cbox {
+    align: left;
+  }
   /* #b {
     background-color: #9999FF;
+  } */
+
+  /* span {
+    display: inline-block;
+    background: red;
+    width: 200px;
+    height: 20px;
+  }
+
+  input[type=checkbox] {
+    width: 20px;
+    height: 20px;
   } */
 </style>
 
@@ -66,14 +83,17 @@ View Return: HttpResponse : message - "Success."
     <div>
       <!-- The attendee list is only members within the cell -->
         <label>Attendee List</label><br>
+        <!-- <input id='cbox' type="checkbox" value="{{ member.pk }}"> -->
         {% for member in form.member %}
-        <input type="checkbox" value="{{ member.pk }}">{{ member }}
+        <!-- {{ member }} -->
+        <input id='cbox' type="checkbox" value="{{ member.pk }}">
+        {{ member }}
         {% endfor %}
         <label>Meeting Recorder: </label>
         {{ form.member }}
         <!-- <label>Take Attendance</label> -->
         <!-- {{ form.attendee_list }} <br> -->
-        <button type="submit" id='next'>Next</button>
+        <br><button type="submit" id='next'>Next</button>
 
         <!-- <a href="{% url 'work_review' %}">Clic here</a> -->
         <!-- <a href="work_review">Clic here</a> -->

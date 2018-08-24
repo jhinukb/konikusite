@@ -13,13 +13,13 @@
     height: 150px;
     border-color: black;
     border-width: 1px;
-    font-size: 15px;
+    font-size: 20px;
   }
   #addButton, #removeButton, #add_work, #next {
     color: indigo;
     background-color: aliceblue;
     border-color: indigo;
-    font-size: 15px;
+    font-size: 20px;
   }
   #selection {
     font-size: 20px;
@@ -43,8 +43,10 @@
   } */
 
   #workreview_form {
-    margin-left: 20px;
-    margin-right: 500px;
+    /* margin-left: 20px;
+    margin-right: 500px; */
+    text-align: center;
+    font-size: 20px;
   }
 
   #next {
@@ -63,7 +65,7 @@
 </head>
 <form method='post' id='workreview_form' novalidate>
   <body>
-  <h2> Work Review </h2>
+  <h2> Work Review </h2><br>
   </body>
 {% csrf_token %}
     <!-- *name -->
@@ -75,7 +77,7 @@
       <option value="{{ member.pk }}">{{ member.member_name }}</option>
       {% endfor %}
     </select><br><br> -->
-    <label>File Location:</label>
+    &nbsp &nbsp<label>File Location:</label>
     {{ form.file_location }}<br><br>
     <label id='selection'><b>Select the appropriate box:</b></label><br>
     <!-- {{ form.content_val }} -->
@@ -91,10 +93,10 @@
     {% for val in form.validate %}
     <label for="{{ val.id_for_label }}">
         <span class="radio">{{ val.tag }}</span>
-        {{ val.choice_label }}<br>
+        {{ val.choice_label }}
     </label>
     {% endfor %}
-    <td valign='top' id='a'>{{ form.content_val }}</td>
+    <br><td valign='top' id='a'>{{ form.content_val }}</td>
     <!-- <td valign='top' id='b'>{{ form.content_noVal }}</td> -->
     <br><button type="submit" id='next'>Next</button>
     <br>
